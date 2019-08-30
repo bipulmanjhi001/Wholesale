@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20sp"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="ABOUT WHOLESALE FACTORY"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_margin="20sp"
+        android:text="Wholesale factory is a largest trade network for manufacture,trader,wholesaler and retailers.
+In this app we connect B2B, we have designed this application specifically for long,medium and short term business. We will directly connect you from manufacture to wholesaler and reatiler.
+Wholesale factory wll provide u fastest way to get connected with manufacture of all over india on a single platform. You can easily place ur order with manufacture directly in this application."
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20sp"
+        android:gravity="center"
+        android:text="CONNECT"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20sp"
+        android:gravity="center"
+        android:text="wholesale factory will join you to more than 50000+ buyer and seller from 29 states.And help you to buy right product according to your choice."
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20sp"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="PURCHASE AND SALE "
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20sp"
+        android:gravity="center"
+        android:text="Manufacture will post a product image and its detail which he want to sell and buyer will select those product according to his/her choice after reading all detail regarding product."
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20sp"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Business GROW"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20sp"
+        android:gravity="center"
+        android:text="Wholesale factory is a big platform which help manufacture and buyer to grow their network and business."
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20sp"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Regarding enquiry"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20sp"
+        android:paddingBottom="60sp"
+        android:gravity="center"
+        android:text="In this wholesale factory app you can easy chat with the manufacture and can enquiry about the product .After  full satisfaction only you can place order."
+        android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>

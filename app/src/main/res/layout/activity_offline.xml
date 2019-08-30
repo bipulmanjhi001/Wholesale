@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/homecheckconnection"
+    android:background="@color/white"
+    tools:context=".main.CategoryList">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryDark"
+        android:layout_height="wrap_content">
+
+  <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+  <ImageView
+    android:layout_width="200dp"
+    android:background="@drawable/offline"
+    android:layout_height="200dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="#FF000000"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:text="You are offline."
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/offline_more"
+        android:layout_width="160dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/offline_button"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="16dp"
+            android:text="More"
+            android:textStyle="bold"
+            android:textColor="#FF000000"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>

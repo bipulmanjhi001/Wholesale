@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/co_activity_root_layout"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColorHint="@color/colorPrimary"
+        android:layout_below="@+id/toolbar_layout">
+
+        <FrameLayout
+            android:id="@+id/fl_fragment_container"
+            android:layout_width="match_parent"
+            android:textColorHint="@color/colorPrimary"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <ImageView
+                    android:layout_width="50sp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8sp"
+                    android:background="@drawable/ic_launcher_round"
+                    android:layout_height="50sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Connect via Social Accounts"
+                    android:layout_gravity="center"
+                    android:textStyle="normal"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        app:cardCornerRadius="6dp"
+                        android:layout_margin="10sp"
+                        android:translationZ="1sp"
+                        android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/ic_facebook"
+                        android:layout_margin="10sp"
+                        android:layout_height="wrap_content" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        app:cardCornerRadius="6dp"
+                        android:layout_margin="10sp"
+                        android:translationZ="1sp"
+                        android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/ic_search"
+                        android:layout_margin="10sp"
+                        android:layout_height="wrap_content" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Enter your 10 digit mobile number to receive the verification code."
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:layout_margin="12sp"
+                    android:layout_height="wrap_content" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/login_form"
+                    android:layout_width="match_parent"
+                    app:cardCornerRadius="10sp"
+                    android:translationZ="1sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_below="@+id/img_logo"
+                    android:background="#FFF"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/email_login_form"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:layout_margin="20dp"
+                        android:focusableInTouchMode="true"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:textSize="16sp"
+                            android:imeOptions="actionUnspecified"
+                            android:id="@+id/user_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/prompt_phone"
+                            android:textColorHint="@color/colorPrimary"
+                            android:inputType="number"
+                            android:focusable="true"
+                            android:drawableLeft="@drawable/ic_icon"
+                            android:paddingLeft="10sp"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/colorPrimary"
+                            android:focusableInTouchMode="true"
+                            android:maxLines="1"
+                            android:singleLine="true"/>
+
+                        <Button
+                            android:id="@+id/sign_in_button"
+                            style="?android:textAppearanceSmall"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/ic_launcher_background"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Sign In"
+                            android:textColor="#fff"
+                            android:textSize="16dp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </FrameLayout>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

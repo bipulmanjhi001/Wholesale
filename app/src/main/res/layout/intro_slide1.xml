@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_screen1"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#f64c73"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:text="Permissions"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+     <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+         android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+         <TextView
+             android:layout_width="match_parent"
+             android:textColor="@color/white"
+             android:text="Location"
+             android:textStyle="bold"
+             android:layout_marginLeft="10sp"
+             android:textSize="20sp"
+             android:layout_height="wrap_content" />
+
+         <TextView
+             android:layout_width="match_parent"
+             android:text="We use your location to help you search &amp; discover products more effectively on Wholesale. "
+             android:textColor="@color/white"
+             android:textSize="13sp"
+             android:layout_marginLeft="12sp"
+             android:layout_marginRight="10sp"
+             android:layout_marginTop="5sp"
+             android:layout_marginBottom="5sp"
+             android:layout_height="wrap_content" />
+
+         <TextView
+             android:layout_width="match_parent"
+             android:textColor="@color/white"
+             android:text="Contacts"
+             android:textStyle="bold"
+             android:layout_marginLeft="10sp"
+             android:textSize="20sp"
+             android:layout_height="wrap_content" />
+
+         <TextView
+             android:layout_width="match_parent"
+             android:text="We read your contacts to help in your business. "
+             android:textColor="@color/white"
+             android:textSize="13sp"
+             android:layout_marginBottom="5sp"
+             android:layout_marginLeft="10sp"
+             android:layout_height="wrap_content" />
+
+       <ImageView
+           android:layout_width="wrap_content"
+           android:background="@drawable/pro1"
+           android:layout_gravity="center"
+           android:layout_height="wrap_content" />
+
+         <LinearLayout
+             android:id="@+id/CONFIRM_add"
+             android:layout_width="match_parent"
+             android:layout_height="50sp"
+             android:orientation="vertical"
+             android:layout_margin="10sp"
+             android:layout_gravity="center"
+             android:focusable="true"
+             android:gravity="center"
+             android:background="@color/white"
+             android:layout_alignParentBottom="true"
+             android:layout_alignParentRight="true">
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:text="Allow"
+                 android:textSize="16sp"
+                 android:layout_gravity="center"
+                 android:textStyle="bold"
+                 android:focusable="true"
+                 android:gravity="center"
+                 android:textColor="@color/colorPrimaryDark"
+                 android:layout_height="wrap_content" />
+
+         </LinearLayout>
+
+     </LinearLayout>
+
+    </LinearLayout>

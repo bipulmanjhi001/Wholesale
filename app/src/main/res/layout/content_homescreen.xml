@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff2f2"
+    android:id="@+id/home_scroll"
+    android:scrollbars="none"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".drawer.Homescreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/search_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="6dp">
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_margin="10sp"
+            android:background="@drawable/searchshape"
+            android:translationZ="2dp"
+            android:layout_height="30sp">
+
+            <ImageView
+                android:layout_width="20sp"
+                android:padding="10sp"
+                android:layout_marginLeft="4sp"
+                android:background="@drawable/ic_marker"
+                android:layout_height="20sp" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:text="Location"
+                android:paddingLeft="6dp"
+                android:textStyle="normal"
+                android:textColor="#111111"
+                android:textSize="10sp"
+                android:typeface="serif"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_margin="10sp"
+            android:background="@drawable/searchshape"
+            android:translationZ="2dp"
+            android:layout_height="30sp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:padding="10sp"
+                android:layout_marginLeft="4sp"
+                android:background="@drawable/ic_search_black_24dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:text="Wholesale Factory"
+                android:paddingLeft="6dp"
+                android:textColor="#141414"
+                android:textSize="10sp"
+                android:typeface="serif"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="4dp"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/shop"
+            android:id="@+id/viewPager"
+            android:fitsSystemWindows="true"/>
+
+        <LinearLayout
+            android:id="@+id/layoutDots"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dots_height"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"/>
+
+    </LinearLayout>
+
+        <!-- start -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/extra_layout"/>
+        </LinearLayout>
+        <!-- End -->
+
+      <!-- start -->
+        <LinearLayout
+            android:id="@+id/verify_a1"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/submit_proof_layout"/>
+        </LinearLayout>
+        <!-- End -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:orientation="vertical"
+            android:layout_marginLeft="6sp"
+            android:layout_marginRight="6sp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryDark"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textSize="16dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/white"
+                android:text="Top Sellers Profile Show"
+                android:layout_height="wrap_content" />
+
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progressBar"
+                    android:layout_width="30dp"
+                    android:translationZ="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/feature_visible"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="6sp"
+            android:layout_marginRight="6sp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/new_arrivals"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginLeft="6sp"
+            android:layout_marginRight="6sp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textSize="16dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/white"
+                android:text="Top Offers"
+                android:layout_height="wrap_content" />
+
+            <include layout="@layout/new_brands"/>
+
+        </LinearLayout>
+        <!-- start -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginLeft="6sp"
+            android:layout_marginRight="6sp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textSize="16dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/white"
+                android:text="New Sellers"
+                android:layout_height="wrap_content" />
+
+            <include layout="@layout/extra_layout2"/>
+        </LinearLayout>
+
+        <!-- start -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            android:background="@color/white"
+            android:layout_height="70sp">
+
+        </LinearLayout>
+        <!-- End -->
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "838887925682",
+    "firebase_url": "https://wholesalefactory-b99ad.firebaseio.com",
+    "project_id": "wholesalefactory-b99ad",
+    "storage_bucket": "wholesalefactory-b99ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838887925682:android:854947a136c819e8",
+        "android_client_info": {
+          "package_name": "wholesalefactory.co"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838887925682-gpc28q4s9vus9n5ivvl38a3vu7fnd5o9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wholesalefactory.co",
+            "certificate_hash": "e96918edd20ff416b3d31431657272226842de3a"
+          }
+        },
+        {
+          "client_id": "838887925682-ne7c15gu8ogq7a7i52qn7nfgfpbvh2ko.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjpFx3rrMjC-j7CcG5hVlHFNYqyEys7Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838887925682-ne7c15gu8ogq7a7i52qn7nfgfpbvh2ko.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

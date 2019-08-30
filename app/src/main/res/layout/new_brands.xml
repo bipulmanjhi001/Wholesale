@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="6dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/show_feature"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:textSize="16dp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:text="FEATURE PRODUCTS"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="#ffffff"
+                android:layout_marginTop="4dp"
+                android:layout_height="0.2dp"/>
+
+        </LinearLayout>
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    android:layout_weight="1"
+                    android:id="@+id/new_arrival_product1"
+                    android:layout_width="140dp"
+                    android:layout_margin="4dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    app:cardCornerRadius="6dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="130dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_height="120dp">
+                            <ImageView
+                                android:id="@+id/img_feature1"
+                                android:layout_width="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shoppings"
+                                android:layout_marginRight="10dp"
+                                android:layout_height="match_parent" />
+                            <TextView
+                                android:id="@+id/feature_id1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/feature_desc1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/gettitle1"
+                                android:layout_width="match_parent"
+                                android:textColor="@android:color/black"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="NEBULAR 2 M SS 19 Running"
+                                android:singleLine="true"
+                                android:textSize="12sp"
+                                android:ellipsize="end"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="6dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:text="&#36;"
+                                    android:textStyle="bold"
+                                    android:textSize="12dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:layout_marginRight="4dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_height="wrap_content" />
+                                <TextView
+                                    android:id="@+id/getprice1"
+                                    android:layout_width="wrap_content"
+                                    android:textColor="#B1240D"
+                                    android:textStyle="bold"
+                                    android:textSize="12dp"
+                                    android:text="180"
+                                    android:layout_marginBottom="6dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/new_arrival_product2"
+                    android:layout_weight="1"
+                    android:layout_width="140dp"
+                    android:layout_margin="4dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    app:cardCornerRadius="6dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="130dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_height="120dp">
+                            <ImageView
+                                android:id="@+id/img_feature2"
+                                android:layout_width="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/a1"
+                                android:layout_marginRight="10dp"
+                                android:layout_height="match_parent" />
+                            <TextView
+                                android:id="@+id/feature_id2"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/feature_desc2"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/gettitle2"
+                                android:layout_width="match_parent"
+                                android:textColor="@android:color/black"
+                                android:singleLine="true"
+                                android:text="COSET 2018 M SS 19 Flip Flops"
+                                android:ellipsize="end"
+                                android:layout_gravity="center"
+                                android:textSize="12sp"
+                                android:gravity="center"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginTop="6dp"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="#B1240D"
+                                    android:text="&#36;"
+                                    android:textStyle="bold"
+                                    android:textSize="12dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:layout_marginRight="4dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_height="wrap_content" />
+                                <TextView
+                                    android:id="@+id/getprice2"
+                                    android:layout_width="wrap_content"
+                                    android:textColor="#B1240D"
+                                    android:textStyle="bold"
+                                    android:textSize="12dp"
+                                    android:text="180"
+                                    android:layout_marginBottom="6dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/new_arrival_product4"
+                    android:layout_weight="1"
+                    android:layout_width="140dp"
+                    android:layout_margin="4dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    app:cardCornerRadius="6dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="130dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_height="120dp">
+
+                            <ImageView
+                                android:id="@+id/img_feature4"
+                                android:layout_width="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/a2"
+                                android:layout_marginRight="10dp"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:id="@+id/feature_id4"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:id="@+id/feature_desc4"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/gettitle4"
+                                android:layout_width="match_parent"
+                                android:textColor="@android:color/black"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:singleLine="true"
+                                android:textSize="12sp"
+                                android:ellipsize="end"
+                                android:text="HOIST Men Grey Flats"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginTop="6dp"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="#B1240D"
+                                    android:text="&#36;"
+                                    android:textStyle="bold"
+                                    android:textSize="12dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:layout_marginRight="4dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="#B1240D"
+                                    android:textStyle="bold"
+                                    android:textSize="12dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:text="180"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_weight="1"
+                    android:layout_width="140dp"
+                    android:layout_margin="4dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    app:cardCornerRadius="6dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="130dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_height="120dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/a3"
+                                android:layout_marginRight="10dp"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:textColor="@android:color/black"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="Premium Slip On For Men"
+                                android:singleLine="true"
+                                android:textSize="12sp"
+                                android:ellipsize="end"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginTop="6dp"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="#B1240D"
+                                    android:text="&#36;"
+                                    android:textStyle="bold"
+                                    android:textSize="12dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:layout_marginRight="4dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:id="@+id/getprice4"
+                                    android:layout_width="wrap_content"
+                                    android:textColor="#B1240D"
+                                    android:textStyle="bold"
+                                    android:textSize="12dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:text="180"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="#ffffff"
+            android:layout_marginTop="4dp"
+            android:layout_height="0.2dp"/>
+    </LinearLayout>
+</LinearLayout>

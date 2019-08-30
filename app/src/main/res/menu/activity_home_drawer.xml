@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_order"
+            android:icon="@drawable/ic_ecommerce"
+            android:title="Your Orders" />
+
+        <item
+            android:id="@+id/nav_returns"
+            android:icon="@drawable/ic_return"
+            android:title="Your Returns" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_businessman"
+            android:title="About Wholesale Factory" />
+
+        <item
+            android:id="@+id/nav_sell"
+            android:icon="@drawable/ic_sell_product"
+            android:title="Sell on Wholesale Factory" />
+
+        <item
+            android:id="@+id/nav_policies"
+            android:icon="@drawable/ic_banking"
+            android:title="Policies" />
+
+
+    </group>
+</menu>
