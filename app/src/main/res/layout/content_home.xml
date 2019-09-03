@@ -56,6 +56,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/chats"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:orientation="vertical"
@@ -78,6 +79,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/follows"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:orientation="vertical"
@@ -102,6 +104,7 @@
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_height="wrap_content">

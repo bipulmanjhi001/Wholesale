@@ -22,12 +22,12 @@
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_businessman"
-            android:title="About Wholesale Factory" />
+            android:title="About W/F" />
 
         <item
             android:id="@+id/nav_sell"
             android:icon="@drawable/ic_sell_product"
-            android:title="Sell on Wholesale Factory" />
+            android:title="Sell on W/F" />
 
         <item
             android:id="@+id/nav_policies"

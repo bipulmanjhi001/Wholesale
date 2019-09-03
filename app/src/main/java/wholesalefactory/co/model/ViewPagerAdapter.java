@@ -20,7 +20,6 @@ public class ViewPagerAdapter extends PagerAdapter {
     private List<SliderUtils> sliderImg;
     private ImageLoader imageLoader;
 
-
     public ViewPagerAdapter(List sliderImg,Context context) {
         this.sliderImg = sliderImg;
         this.context = context;

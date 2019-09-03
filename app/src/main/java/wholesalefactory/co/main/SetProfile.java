@@ -26,22 +26,19 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+import de.hdodenhof.circleimageview.CircleImageView;
 import wholesalefactory.co.R;
 import wholesalefactory.co.api.URLs;
 import wholesalefactory.co.model.VolleySingleton;
@@ -49,11 +46,11 @@ import wholesalefactory.co.model.VolleySingleton;
 public class SetProfile extends AppCompatActivity {
 
     ImageView back_from_upload,show_img;
-    Button click_bill,add_state;
+    Button click_bill,add_state,click_logo;
     public  static final int RequestPermissionCode  = 1 ;
-    String imageBase;
+    String imageBase,logos;
     Intent intent;
-    LinearLayout visible_bill;
+    LinearLayout visible_bill,visible_logo;
     EditText shop_name,Business_Type,shop_address,shop_pincode,shop_Landmark,reg_no;
     TextView Other,city;
     private static final String SHARED_PREF_NAME = "wholesalepref";
@@ -68,6 +65,8 @@ public class SetProfile extends AppCompatActivity {
     LinearLayout CONFIRM_add;
     Dialog dialog,dialog2;
     Bitmap bitmap;
+    Boolean checkCam=false;
+    CircleImageView logo_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +76,10 @@ public class SetProfile extends AppCompatActivity {
         EnableRuntimePermission();
         back_from_upload=(ImageView)findViewById(R.id.back_from_upload);
         show_img=(ImageView)findViewById(R.id.show_img);
-
+        visible_logo=(LinearLayout)findViewById(R.id.visible_logo);
         SharedPreferences prefs = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         tokens = prefs.getString(KEY_ID, null);
+        logo_image=(CircleImageView)findViewById(R.id.logo_image);
 
         visible_bill=(LinearLayout)findViewById(R.id.visible_bill);
         back_from_upload.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +97,15 @@ public class SetProfile extends AppCompatActivity {
                 startActivityForResult(intent, 7);
             }
         });
+        click_logo=(Button)findViewById(R.id.click_logo);
+        click_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 7);
+            }
+        });
+
         dialog=new Dialog(SetProfile.this);
         dialog2=new Dialog(SetProfile.this);
         shop_name = (EditText)findViewById(R.id.shop_name);
@@ -207,6 +216,7 @@ public class SetProfile extends AppCompatActivity {
                                 city.setText("");
                                 imageBase="";
                                 show_img.setVisibility(View.GONE);
+                                visible_logo.setVisibility(View.GONE);
 
                             } else {
                                 Toast.makeText(getApplicationContext(), "Check details again.", Toast.LENGTH_SHORT).show();
@@ -227,6 +237,7 @@ public class SetProfile extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 imageBase=getStringImageCam(bitmap);
+                logos=getStringImage(bitmap);
                 params.put("token", tokens);
                 params.put("shop_name", names);
                 params.put("business_type", emails);
@@ -237,6 +248,7 @@ public class SetProfile extends AppCompatActivity {
                 params.put("state", stateid);
                 params.put("gstin",reg_nos);
                 params.put("image",imageBase);
+                params.put("logo",logos);
                 return params;
             }
         };
@@ -397,10 +409,26 @@ public class SetProfile extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 7 && resultCode == RESULT_OK) {
-            visible_bill.setVisibility(View.VISIBLE);
             bitmap = (Bitmap) data.getExtras().get("data");
-            show_img.setImageBitmap(bitmap);
+            if(checkCam){
+                visible_bill.setVisibility(View.VISIBLE);
+                show_img.setImageBitmap(bitmap);
+            }
+            if(!checkCam){
+                visible_logo.setVisibility(View.VISIBLE);
+                logo_image.setImageBitmap(bitmap);
+                click_logo.setVisibility(View.GONE);
+                checkCam = true;
+            }
         }
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
     public void EnableRuntimePermission() {

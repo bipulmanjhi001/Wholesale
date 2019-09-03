@@ -14,8 +14,12 @@ public class URLs {
     public static final String URL_updateshop = ROOT_URL + "updateshop";
     public static final String URL_profile = ROOT_URL + "profile";
     public static final String URL_privacypolicy = ROOT_URL + "privacypolicy";
-    public static final String URL_setsubcategory = ROOT_URL + "setsubcategory";
     public static final String URL_updatephoto = ROOT_URL + "updatephoto";
     public static final String URL_setpic = ROOT_URL + "userphoto";
+    public static final String URL_dashboardtop = ROOT_URL + "dashboardtop";
+    public static final String URL_dashboardmiddle = ROOT_URL + "dashboardmiddle";
+    public static final String URL_addproduct = ROOT_URL + "addproduct";
+    public static final String  URL_productcategory = ROOT_URL + "productcategory";
+    public static final String  URL_productsubcategory = ROOT_URL + "productsubcategory";
 
 }

@@ -69,7 +69,11 @@ public class Policies extends Fragment {
         WebSettings settings = wvPage1.getSettings();
         settings.setJavaScriptEnabled(true);
 
-        wvPage1.setWebViewClient(new MyWebViewClient());
+        try {
+            wvPage1.setWebViewClient(new MyWebViewClient());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         wvPage1.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {

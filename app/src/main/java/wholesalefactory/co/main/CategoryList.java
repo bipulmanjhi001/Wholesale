@@ -68,8 +68,7 @@ public class CategoryList extends AppCompatActivity {
             mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                     Category_Grid_Model item = (Category_Grid_Model) parent.getItemAtPosition(position);
-                    Intent intent = new Intent(CategoryList.this, ProductsList.class);
-                    intent.putExtra("id", item.getId());
+                    Intent intent = new Intent(CategoryList.this, Home.class);
                     startActivity(intent);
                     finish();
                 }

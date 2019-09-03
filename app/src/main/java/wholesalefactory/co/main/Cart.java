@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import wholesalefactory.co.R;
 
 public class Cart extends AppCompatActivity {
+
     ImageView back_from_cart;
     TextView cart_title;
 

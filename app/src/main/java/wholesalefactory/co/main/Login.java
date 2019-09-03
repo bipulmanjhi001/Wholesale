@@ -52,12 +52,10 @@ public class Login extends AppCompatActivity {
         tokens = prefs.getString(KEY_ID, null);
         phone = prefs.getString("phone", "");
 
-
         sign_in_button = (Button) findViewById(R.id.sign_in_button);
         sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 TrueSdkScope trueScope = new TrueSdkScope.Builder(Login.this, sdkCallback)
                         .consentMode(TrueSdkScope.CONSENT_MODE_POPUP )
                         .consentTitleOption( TrueSdkScope.SDK_CONSENT_TITLE_VERIFY )

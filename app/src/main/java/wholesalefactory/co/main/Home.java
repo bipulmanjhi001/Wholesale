@@ -74,7 +74,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     Intent intent;
     private static final String SHARED_PREF_NAME = "wholesalepref";
     private static final String KEY_ID = "token";
-    String tokens,phoness,pic;
+    String tokens,phoness,pic,ids;
+    LinearLayout follow,chats;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,21 +100,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         SharedPreferences tokes = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         tokens = tokes.getString(KEY_ID, null);
-        phoness = tokes.getString(KEY_ID,null);
+        phoness = tokes.getString("role",null);
 
         SharedPreferences prefs = getSharedPreferences(
                 "myprofile", MODE_PRIVATE);
         String name = prefs.getString("userName", "");
-        String phone = prefs.getString("mobile", "");
+         phoness = prefs.getString("mobile", "");
 
-        if(TextUtils.isEmpty("phone")) {
+        if(TextUtils.isEmpty(name)) {
             phones.setText("+91 - " + phoness);
             txtName.setText("WholeSale Factory");
         }else {
             txtName.setText(name);
-            phones.setText("+91 - " + phone);
+            phones.setText("+91 - " + phoness);
         }
-
         title= (TextView)findViewById(R.id.title);
         profilepic=(CircleImageView)navHeader.findViewById(R.id.imageView);
         profilepic.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +148,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 whishlist_on.startAnimation(myAnim);
             }
         });
-
         whishlist_on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,8 +159,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 whishlist_off.startAnimation(myAnim);
             }
         });
-
         home=(LinearLayout)findViewById(R.id.home);
+        follow=(LinearLayout)findViewById(R.id.follows);
+        chats=(LinearLayout)findViewById(R.id.chats);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +172,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
             }
         });
-
+        follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Home.this,FollowUs.class);
+                startActivity(intent);
+            }
+        });
+        chats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Home.this,ChatActivity.class);
+                startActivity(intent);
+            }
+        });
         check_notifications=(ImageView)findViewById(R.id.check_notifications);
         check_notifications.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,7 +195,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 check_notifications.startAnimation(shake);
             }
         });
-
         home_prescription_cart=(ImageView)findViewById(R.id.home_prescription_cart);
         home_prescription_cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,13 +257,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.dashboard, new About()).commit();
-            title.setText("About Us");
+            title.setText("About W/F");
 
         } else if (id == R.id.nav_sell) {
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.dashboard, new Sell()).commit();
-            title.setText("Sell");
+            title.setText("Sell on W/F");
 
         }  else if (id == R.id.nav_policies) {
 
@@ -373,6 +386,5 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         };
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
-
 
 }

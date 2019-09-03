@@ -23,7 +23,9 @@ public class ProductAddedList extends AppCompatActivity {
         back_from_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+             Intent intent=new Intent(ProductAddedList.this,Home.class);
+             startActivity(intent);
+             finish();
             }
         });
 

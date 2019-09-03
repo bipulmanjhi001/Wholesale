@@ -28,17 +28,21 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,11 +52,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import wholesalefactory.co.R;
+import wholesalefactory.co.adapter.ProductAdapter;
+import wholesalefactory.co.adapter.Top_Sallers_Adapter;
 import wholesalefactory.co.api.URLs;
 import wholesalefactory.co.main.Proof;
+import wholesalefactory.co.model.ExpandableHeightGridView;
+import wholesalefactory.co.model.ProductModel;
+import wholesalefactory.co.model.SliderUtils;
+import wholesalefactory.co.model.Top_Sallers_Model;
 import wholesalefactory.co.model.UpdateMeeDialog;
+import wholesalefactory.co.model.ViewPagerAdapter;
 import wholesalefactory.co.model.VolleySingleton;
-
 import static android.content.Context.MODE_PRIVATE;
 
 public class Homescreen  extends Fragment {
@@ -64,6 +74,7 @@ public class Homescreen  extends Fragment {
     private Dialog myDialog;
     public static String PACKAGE_NAME;
     private LinearLayout verify_a1;
+
     Boolean off_welcome=true;
     LocationTrack locationTrack;
     private String versionName;
@@ -71,17 +82,36 @@ public class Homescreen  extends Fragment {
     private Double longitude,latitude;
     private TextView locationtext;
     private ListView Type,Type2;
+
     private ArrayList state_names = new ArrayList();
     private ArrayList state_ids = new ArrayList();
-    private  ArrayList city_names = new ArrayList();
+    private ArrayList city_names = new ArrayList();
     private ArrayList city_ids = new ArrayList();
     private EditText address1,Landmark,pincode,name,email;
     private TextView city,Other;
+
     private static final String SHARED_PREF_NAME = "wholesalepref";
     private static final String KEY_ID = "token";
     private String tokens,city_id,stateid;
     private String names,addresss,emails,citys,Landmarks,Others,pincodes;
 
+    private ExpandableHeightGridView mGridView;
+    private ExpandableHeightGridView top_sallers;
+    private ProductAdapter productAdapter;
+    private ArrayList<ProductModel> mGridData;
+    private ImageView[] dots;
+    private ViewPager viewPager;
+    private LinearLayout sliderDotspanel;
+    private int dotscount;
+    private List<SliderUtils> sliderImg;
+    private SliderUtils sliderUtils;
+    private ViewPagerAdapter viewPagerAdapter;
+    private ImageView submit_proof;
+    String bannerbottom;
+    protected LocationManager locationManager;
+    private Top_Sallers_Adapter top_sallers_adapter;
+    private ArrayList<Top_Sallers_Model> top_sallers_models;
+    String top_saller_img;
 
     public Homescreen() {
     }
@@ -108,7 +138,6 @@ public class Homescreen  extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_homescreen, container, false);
         myDialog=new Dialog(getActivity());
-
             ShowPopup(view);
 
         final PackageManager packageManager = getActivity().getPackageManager();
@@ -123,6 +152,7 @@ public class Homescreen  extends Fragment {
         }
         SharedPreferences prefs = getActivity().getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         tokens = prefs.getString(KEY_ID, null);
+        Log.d("token",tokens);
 
         UPDATE();
         locationtext=(TextView)view.findViewById(R.id.location);
@@ -136,8 +166,196 @@ public class Homescreen  extends Fragment {
         });
 
         locationTrack = new LocationTrack(getActivity());
+        mGridView=(ExpandableHeightGridView)view.findViewById(R.id.grid_imagelist_pro);
+        top_sallers=(ExpandableHeightGridView)view.findViewById(R.id.grid_top_sellers);
+        mGridView.setExpanded(true);
+        top_sallers.setExpanded(true);
+        mGridData = new ArrayList<ProductModel>();
+        top_sallers_models=new ArrayList<Top_Sallers_Model>();
 
+           /* mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    Category_Grid_Model item = (Category_Grid_Model) parent.getItemAtPosition(position);
+                    Intent intent = new Intent(getActivity(), ChatActivity.class);
+                    intent.putExtra("id", item.getId());
+                    startActivity(intent);
+                }
+            });*/
+
+        submit_proof=(ImageView)view.findViewById(R.id.submit_proof);
+        sliderImg = new ArrayList<>();
+        viewPager = (ViewPager)view.findViewById(R.id.viewPager);
+        sliderDotspanel = (LinearLayout)view.findViewById(R.id.layoutDots);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                try {
+                    for (int i = 0; i < dotscount; i++) {
+                        dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.non_active_dot));
+                    }
+                    dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.active_dot));
+
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         return view;
+    }
+
+    private void CallProduct(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_dashboardtop,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if(obj.getBoolean("status")) {
+                                JSONObject dashobj=obj.getJSONObject("dashboard");
+                                JSONArray sliearr=dashobj.getJSONArray("banner");
+
+                                for(int j = 0; j < sliearr.length(); j++){
+                                    sliderUtils = new SliderUtils();
+                                    try {
+                                        JSONObject getslide = sliearr.getJSONObject(j);
+                                        sliderUtils.setSliderImageUrl(getslide.getString("image"));
+                                        sliderImg.add(sliderUtils);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                JSONArray userJson = dashobj.getJSONArray("subcategory");
+                                for (int i = 0; i < userJson.length(); i++) {
+                                    JSONObject itemslist = userJson.getJSONObject(i);
+                                    String id = itemslist.getString("id");
+                                    String name = itemslist.getString("name");
+                                    String photo = itemslist.getString("image");
+
+                                    ProductModel productModel = new ProductModel(id, name, photo,false);
+                                    mGridData.add(productModel);
+                                }
+                                bannerbottom=dashobj.getString("bannerbottom");
+                            }else {
+                                Toast.makeText(getActivity(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        viewPagerAdapter = new ViewPagerAdapter(sliderImg, getActivity());
+                        viewPager.setAdapter(viewPagerAdapter);
+                        dotscount = viewPagerAdapter.getCount();
+                        dots = new ImageView[dotscount];
+
+                        for(int i = 0; i < dotscount; i++){
+
+                            dots[i] = new ImageView(getActivity());
+                            dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.non_active_dot));
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            params.setMargins(8, 0, 8, 0);
+                            sliderDotspanel.addView(dots[i], params);
+
+                        }
+                        dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.active_dot));
+
+                        productAdapter = new ProductAdapter(getActivity(), R.layout.product_list, mGridData);
+                        mGridView.setAdapter(productAdapter);
+                        productAdapter.setGridData(mGridData);
+                        mGridView.setVisibility(View.VISIBLE);
+                        Picasso.with(getActivity())
+                                .load(bannerbottom)
+                                .fit().centerCrop()
+                                .into(submit_proof);
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("token",tokens);
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
+        TopSallers();
+    }
+
+    private void TopSallers(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_dashboardmiddle,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if(obj.getBoolean("status")) {
+                                JSONObject dashobj=obj.getJSONObject("dashboard");
+                                JSONArray toparr=dashobj.getJSONArray("topsellers");
+
+                                for(int j = 0; j < toparr.length(); j++){
+                                    try {
+                                        JSONObject gettop = toparr.getJSONObject(j);
+                                        top_saller_img= gettop.getString("image");
+                                        Top_Sallers_Model top_sallers_model=new Top_Sallers_Model();
+                                        top_sallers_model.setImage(top_saller_img);
+                                        top_sallers_models.add(top_sallers_model);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                              /*  JSONArray userJson = dashobj.getJSONArray("subcategory");
+                                for (int i = 0; i < userJson.length(); i++) {
+                                    JSONObject itemslist = userJson.getJSONObject(i);
+                                    String id = itemslist.getString("id");
+                                    String name = itemslist.getString("name");
+                                    String photo = itemslist.getString("image");
+
+                                    ProductModel productModel = new ProductModel(id, name, photo,false);
+                                    mGridData.add(productModel);
+                                }
+                                bannerbottom=dashobj.getString("bannerbottom");*/
+
+                            }else {
+                                Toast.makeText(getActivity(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        top_sallers_adapter = new Top_Sallers_Adapter(getActivity(), R.layout.to_sellers, top_sallers_models);
+                        top_sallers.setAdapter(top_sallers_adapter);
+                        top_sallers_adapter.setGridData(top_sallers_models);
+                        top_sallers.setVisibility(View.VISIBLE);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("token",tokens);
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
     }
 
     @Override
@@ -149,6 +367,7 @@ public class Homescreen  extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        locationTrack.stopListener();
     }
 
     public interface OnFragmentInteractionListener {
@@ -333,6 +552,12 @@ public class Homescreen  extends Fragment {
         locationTrack.stopListener();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        locationTrack.stopListener();
+    }
+
     public void GetState() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_state,
                 new Response.Listener<String>() {
@@ -374,6 +599,7 @@ public class Homescreen  extends Fragment {
             }
         };
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
+        CallProduct();
     }
 
     private void showState(View view) {
@@ -488,7 +714,7 @@ public class Homescreen  extends Fragment {
         Location loc;
         private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
         private static final long MIN_TIME_BW_UPDATES = 60000;
-        protected LocationManager locationManager;
+
 
         public LocationTrack(Context mContext) {
             this.mContext = mContext;
