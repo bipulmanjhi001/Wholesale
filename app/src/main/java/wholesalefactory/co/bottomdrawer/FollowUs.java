@@ -1,14 +1,11 @@
 package wholesalefactory.co.main;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-
 import wholesalefactory.co.R;
-import wholesalefactory.co.drawer.Profile;
 
 public class FollowUs extends AppCompatActivity {
 
