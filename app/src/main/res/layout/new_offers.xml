@@ -96,7 +96,7 @@
                             android:layout_width="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:layout_marginTop="8dp"
+                            android:layout_margin="8dp"
                             android:orientation="vertical"
                             android:layout_height="wrap_content">
                             <TextView
@@ -111,36 +111,6 @@
                                 android:ellipsize="end"
                                 android:layout_height="wrap_content" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="6dp"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:layout_height="wrap_content">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:text="&#36;"
-                                    android:textStyle="bold"
-                                    android:textSize="12dp"
-                                    android:layout_marginBottom="6dp"
-                                    android:layout_marginRight="4dp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:layout_height="wrap_content" />
-                                <TextView
-                                    android:id="@+id/getprice1"
-                                    android:layout_width="wrap_content"
-                                    android:textColor="#B1240D"
-                                    android:textStyle="bold"
-                                    android:textSize="12dp"
-                                    android:text="180"
-                                    android:layout_marginBottom="6dp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -191,7 +161,7 @@
                             android:layout_width="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:layout_marginTop="8dp"
+                            android:layout_margin="8dp"
                             android:orientation="vertical"
                             android:layout_height="wrap_content">
                             <TextView
@@ -206,36 +176,6 @@
                                 android:gravity="center"
                                 android:layout_height="wrap_content" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:layout_marginTop="6dp"
-                                android:layout_height="wrap_content">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:textColor="#B1240D"
-                                    android:text="&#36;"
-                                    android:textStyle="bold"
-                                    android:textSize="12dp"
-                                    android:layout_marginBottom="6dp"
-                                    android:layout_marginRight="4dp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:layout_height="wrap_content" />
-                                <TextView
-                                    android:id="@+id/getprice2"
-                                    android:layout_width="wrap_content"
-                                    android:textColor="#B1240D"
-                                    android:textStyle="bold"
-                                    android:textSize="12dp"
-                                    android:text="180"
-                                    android:layout_marginBottom="6dp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -293,7 +233,7 @@
                             android:layout_width="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:layout_marginTop="8dp"
+                            android:layout_margin="8dp"
                             android:orientation="vertical"
                             android:layout_height="wrap_content">
 
@@ -309,37 +249,6 @@
                                 android:text="HOIST Men Grey Flats"
                                 android:layout_height="wrap_content" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:layout_marginTop="6dp"
-                                android:layout_height="wrap_content">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:textColor="#B1240D"
-                                    android:text="&#36;"
-                                    android:textStyle="bold"
-                                    android:textSize="12dp"
-                                    android:layout_marginBottom="6dp"
-                                    android:layout_marginRight="4dp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:layout_height="wrap_content" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:textColor="#B1240D"
-                                    android:textStyle="bold"
-                                    android:textSize="12dp"
-                                    android:layout_marginBottom="6dp"
-                                    android:text="180"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -393,7 +302,7 @@
                             android:layout_width="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:layout_marginTop="8dp"
+                            android:layout_margin="8dp"
                             android:orientation="vertical"
                             android:layout_height="wrap_content">
 
@@ -408,38 +317,6 @@
                                 android:ellipsize="end"
                                 android:layout_height="wrap_content" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:layout_marginTop="6dp"
-                                android:layout_height="wrap_content">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:textColor="#B1240D"
-                                    android:text="&#36;"
-                                    android:textStyle="bold"
-                                    android:textSize="12dp"
-                                    android:layout_marginBottom="6dp"
-                                    android:layout_marginRight="4dp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:layout_height="wrap_content" />
-
-                                <TextView
-                                    android:id="@+id/getprice4"
-                                    android:layout_width="wrap_content"
-                                    android:textColor="#B1240D"
-                                    android:textStyle="bold"
-                                    android:textSize="12dp"
-                                    android:layout_marginBottom="6dp"
-                                    android:text="180"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

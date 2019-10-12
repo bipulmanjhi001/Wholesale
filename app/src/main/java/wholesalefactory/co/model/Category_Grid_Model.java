@@ -1,4 +1,4 @@
-package wholesalefactory.co.pojo;
+package wholesalefactory.co.model;
 
 public class Category_Grid_Model {
     private String id,name,image;

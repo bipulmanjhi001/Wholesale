@@ -20,7 +20,7 @@
                 android:orientation="horizontal"
                 android:gravity="left|center_vertical"
                 android:layout_height="wrap_content">
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/img_a1"
                     android:layout_weight="1"
                     android:visibility="gone"
@@ -33,8 +33,8 @@
                         android:id="@+id/select_image1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
                     android:id="@+id/img_a2"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -46,8 +46,8 @@
                         android:id="@+id/select_image2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
                     android:id="@+id/img_a3"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -59,8 +59,8 @@
                         android:id="@+id/select_image3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                </android.support.v7.widget.CardView>
-                <android.support.v7.widget.CardView
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
                     android:id="@+id/img_a4"
                     android:layout_weight="1"
                     android:visibility="gone"
@@ -73,7 +73,7 @@
                         android:id="@+id/select_image4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>

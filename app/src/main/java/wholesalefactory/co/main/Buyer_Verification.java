@@ -35,6 +35,7 @@ public class Buyer_Verification extends AppCompatActivity {
                 }
             }
         });
+
         gst_25=(Button)findViewById(R.id.gst_25);
         gst_25.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +47,7 @@ public class Buyer_Verification extends AppCompatActivity {
                 }
             }
         });
+
         gst_06_on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

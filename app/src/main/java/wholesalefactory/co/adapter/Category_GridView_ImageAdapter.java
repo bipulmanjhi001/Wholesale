@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import wholesalefactory.co.R;
-import wholesalefactory.co.pojo.Category_Grid_Model;
+import wholesalefactory.co.model.Category_Grid_Model;
 
 public class Category_GridView_ImageAdapter extends ArrayAdapter<Category_Grid_Model> {
     private Context mContext;
@@ -54,7 +54,7 @@ public class Category_GridView_ImageAdapter extends ArrayAdapter<Category_Grid_M
         holder.url.setText(item.getImage());
         holder.id.setText(item.getId());
 
-        Picasso.with(mContext)
+        Picasso.get()
                 .load(item.getImage())
                 .fit().centerCrop()
                 .into(holder.imageView);

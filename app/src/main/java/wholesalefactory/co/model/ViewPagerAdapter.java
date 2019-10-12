@@ -56,9 +56,9 @@ public class ViewPagerAdapter extends PagerAdapter {
                 if(position == 0){
                     Toast.makeText(context, "Welcome", Toast.LENGTH_SHORT).show();
                 } else if(position == 1){
-                    Toast.makeText(context, "To", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Wholesale", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "Bubbles", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Wholesale", Toast.LENGTH_SHORT).show();
                 }
 
             }

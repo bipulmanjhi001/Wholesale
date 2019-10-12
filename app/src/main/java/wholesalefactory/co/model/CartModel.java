@@ -1,4 +1,4 @@
-package com.org.kulture.kulture.model;
+package wholesalefactory.co.model;
 
 import java.io.Serializable;
 

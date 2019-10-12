@@ -44,5 +44,6 @@
     <string name="select_product">Select Product</string>
     <string name="update">Update</string>
     <string name="category">ex : Clothes</string>
+    <string name="defaultText">Select</string>
 
 </resources>

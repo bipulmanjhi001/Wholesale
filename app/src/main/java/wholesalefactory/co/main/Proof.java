@@ -37,7 +37,7 @@ public class Proof extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(shop_c.isChecked()){
-                    Intent openMain = new Intent(Proof.this,Buyer_Verification.class);
+                    Intent openMain = new Intent(Proof.this,Shop_Buyer_Verification.class);
                     startActivity(openMain);
                     finish();
                     udhyog_c.setChecked(false);
@@ -50,7 +50,7 @@ public class Proof extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(udhyog_c.isChecked()){
-                    Intent openMain = new Intent(Proof.this,Buyer_Verification.class);
+                    Intent openMain = new Intent(Proof.this,Udhyog_Buyer_Verification.class);
                     startActivity(openMain);
                     finish();
                     shop_c.setChecked(false);

@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_margin="10sp"
     android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/profile_lay"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:focusable="false"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/follow_image"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_margin="10sp"
+                android:layout_gravity="center"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#2196F3"
+                android:src="@color/colorPrimaryDark" />
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/follow_shop_name"
+                        android:layout_width="wrap_content"
+                        android:text="SUPER KNIT"
+                        android:layout_gravity="left"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:textColor="#0E0D0D"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/follow_user_id"
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/follow_location"
+                        android:layout_width="wrap_content"
+                        android:text="Ludhiana Punjab"
+                        android:layout_gravity="left"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/profile_product_user_id"
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/Follow"
+                        android:text="Following"
+                        android:textColor="#FFFFFF"
+                        android:layout_weight="1"
+                        android:layout_width="110sp"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/submit_button"
+                        android:shadowColor="#A8A8A8"
+                        android:shadowDx="0"
+                        android:gravity="center"/>/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

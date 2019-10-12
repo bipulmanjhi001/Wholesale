@@ -1,53 +1,102 @@
-package com.org.kulture.kulture.model;
+package wholesalefactory.co.model;
 
 /**
  * Created by tkru on 10/9/2017.
  */
 
-public class Category_Grid_Model {
-    private Integer cat_sub_id;
-    private String cat_sub_name;
-    private String cat_sub_image;
-    private String cat_sub_price;
-    private String cat_sub_desc;
+public class Profile_Category_Grid_Model {
+    private String pro_img;
+    private String id;
+    private String names;
+    private String price;
+    private String actual_price;
+    private String min_qty;
+    private String category;
+    private String subcategory;
+    private String productcategory;
+    private String productsubcategory;
 
-    public String getCat_sub_desc() {
-        return cat_sub_desc;
+    public Profile_Category_Grid_Model() {
+
     }
 
-    public void setCat_sub_desc(String cat_sub_desc) {
-        this.cat_sub_desc = cat_sub_desc;
+    public String getPro_img() {
+        return pro_img;
     }
 
-    public Integer getCat_sub_id() {
-        return cat_sub_id;
+    public void setPro_img(String pro_img) {
+        this.pro_img = pro_img;
     }
 
-    public void setCat_sub_id(Integer cat_sub_id) {
-        this.cat_sub_id = cat_sub_id;
+    public String getId() {
+        return id;
     }
 
-    public String getCat_sub_name() {
-        return cat_sub_name;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setCat_sub_name(String cat_sub_name) {
-        this.cat_sub_name = cat_sub_name;
+    public String getNames() {
+        return names;
     }
 
-    public String getCat_sub_image() {
-        return cat_sub_image;
+    public void setNames(String names) {
+        this.names = names;
     }
 
-    public String getCat_sub_price() {
-        return cat_sub_price;
+    public String getPrice() {
+        return price;
     }
 
-    public void setCat_sub_price(String cat_sub_price) {
-        this.cat_sub_price = cat_sub_price;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public void setCat_sub_image(String cat_sub_image) {
-        this.cat_sub_image = cat_sub_image;
+    public String getActual_price() {
+        return actual_price;
+    }
+
+    public void setActual_price(String actual_price) {
+        this.actual_price = actual_price;
+    }
+
+    public String getMin_qty() {
+        return min_qty;
+    }
+
+    public void setMin_qty(String min_qty) {
+        this.min_qty = min_qty;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSubcategory() {
+        return subcategory;
+    }
+
+    public void setSubcategory(String subcategory) {
+        this.subcategory = subcategory;
+    }
+
+    public String getProductcategory() {
+        return productcategory;
+    }
+
+    public void setProductcategory(String productcategory) {
+        this.productcategory = productcategory;
+    }
+
+    public String getProductsubcategory() {
+        return productsubcategory;
+    }
+
+    public void setProductsubcategory(String productsubcategory) {
+        this.productsubcategory = productsubcategory;
     }
 }

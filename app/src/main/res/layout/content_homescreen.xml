@@ -125,7 +125,7 @@
             android:background="@color/white"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/extra_layout"/>
+            <include layout="@layout/category_layout"/>
         </LinearLayout>
         <!-- End -->
 
@@ -189,7 +189,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/new_arrivals"/>
+            <include layout="@layout/new_sallers"/>
 
         </LinearLayout>
 
@@ -210,7 +210,7 @@
                 android:text="Top Offers"
                 android:layout_height="wrap_content" />
 
-            <include layout="@layout/new_brands"/>
+            <include layout="@layout/new_offers"/>
 
         </LinearLayout>
         <!-- start -->
@@ -228,11 +228,12 @@
                 android:textSize="16dp"
                 android:layout_margin="10dp"
                 android:textColor="@color/white"
-                android:text="New Sellers"
+                android:text="New Arrivals"
                 android:layout_height="wrap_content" />
 
-            <include layout="@layout/extra_layout2"/>
         </LinearLayout>
+
+            <include layout="@layout/new_arrivals"/>
 
         <!-- start -->
         <LinearLayout

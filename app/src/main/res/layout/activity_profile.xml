@@ -36,8 +36,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:text="Profile"
+                    android:layout_weight="1"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+                    android:layout_marginRight="50sp"
                     android:textSize="18sp"
                     android:gravity="center"
                     android:layout_height="wrap_content" />

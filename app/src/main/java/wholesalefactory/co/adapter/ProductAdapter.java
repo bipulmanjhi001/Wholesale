@@ -12,7 +12,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import wholesalefactory.co.R;
 import wholesalefactory.co.model.ProductModel;
-import wholesalefactory.co.pojo.Category_Grid_Model;
 
 public class ProductAdapter extends ArrayAdapter<ProductModel> {
     private Context mContext;
@@ -55,7 +54,7 @@ public class ProductAdapter extends ArrayAdapter<ProductModel> {
         holder.url.setText(item.getUrl());
         holder.id.setText(item.getId());
 
-        Picasso.with(mContext)
+        Picasso.get()
                 .load(item.getUrl())
                 .fit().centerCrop()
                 .into(holder.imageView);

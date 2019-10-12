@@ -1,9 +1,6 @@
 package wholesalefactory.co.drawer;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,16 +8,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -49,16 +38,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import wholesalefactory.co.R;
 import wholesalefactory.co.adapter.ProductAdapter;
 import wholesalefactory.co.adapter.Top_Sallers_Adapter;
 import wholesalefactory.co.api.URLs;
+import wholesalefactory.co.main.Category_Products_List;
 import wholesalefactory.co.main.Proof;
+import wholesalefactory.co.main.Vendor_Profile_With_Products;
+import wholesalefactory.co.model.DownPageAdapter;
 import wholesalefactory.co.model.ExpandableHeightGridView;
 import wholesalefactory.co.model.ProductModel;
 import wholesalefactory.co.model.SliderUtils;
+import wholesalefactory.co.model.SliderUtils2;
 import wholesalefactory.co.model.Top_Sallers_Model;
 import wholesalefactory.co.model.UpdateMeeDialog;
 import wholesalefactory.co.model.ViewPagerAdapter;
@@ -74,29 +66,23 @@ public class Homescreen  extends Fragment {
     private Dialog myDialog;
     public static String PACKAGE_NAME;
     private LinearLayout verify_a1;
-
     Boolean off_welcome=true;
-    LocationTrack locationTrack;
     private String versionName;
     private OnFragmentInteractionListener mListener;
-    private Double longitude,latitude;
-    private TextView locationtext;
     private ListView Type,Type2;
-
     private ArrayList state_names = new ArrayList();
     private ArrayList state_ids = new ArrayList();
     private ArrayList city_names = new ArrayList();
     private ArrayList city_ids = new ArrayList();
     private EditText address1,Landmark,pincode,name,email;
-    private TextView city,Other;
-
+    private TextView city,Other,locationtext;
     private static final String SHARED_PREF_NAME = "wholesalepref";
     private static final String KEY_ID = "token";
     private String tokens,city_id,stateid;
     private String names,addresss,emails,citys,Landmarks,Others,pincodes;
-
     private ExpandableHeightGridView mGridView;
     private ExpandableHeightGridView top_sallers;
+    private ViewPager grid_new_arrivals;
     private ProductAdapter productAdapter;
     private ArrayList<ProductModel> mGridData;
     private ImageView[] dots;
@@ -104,14 +90,17 @@ public class Homescreen  extends Fragment {
     private LinearLayout sliderDotspanel;
     private int dotscount;
     private List<SliderUtils> sliderImg;
+    private List<SliderUtils2> sliderUtils2s;
     private SliderUtils sliderUtils;
+    private SliderUtils2 sliderUtils2;
     private ViewPagerAdapter viewPagerAdapter;
+    private DownPageAdapter downPageAdapter;
     private ImageView submit_proof;
     String bannerbottom;
-    protected LocationManager locationManager;
     private Top_Sallers_Adapter top_sallers_adapter;
     private ArrayList<Top_Sallers_Model> top_sallers_models;
-    String top_saller_img;
+    String top_saller_img,product_ids;
+    Context context;
 
     public Homescreen() {
     }
@@ -138,7 +127,6 @@ public class Homescreen  extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_homescreen, container, false);
         myDialog=new Dialog(getActivity());
-            ShowPopup(view);
 
         final PackageManager packageManager = getActivity().getPackageManager();
         if (packageManager != null) {
@@ -150,11 +138,12 @@ public class Homescreen  extends Fragment {
                 versionName = null;
             }
         }
+
         SharedPreferences prefs = getActivity().getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         tokens = prefs.getString(KEY_ID, null);
-        Log.d("token",tokens);
 
-        UPDATE();
+        CheckShow();
+
         locationtext=(TextView)view.findViewById(R.id.location);
         verify_a1=(LinearLayout)view.findViewById(R.id.verify_a1);
         verify_a1.setOnClickListener(new View.OnClickListener() {
@@ -165,26 +154,42 @@ public class Homescreen  extends Fragment {
             }
         });
 
-        locationTrack = new LocationTrack(getActivity());
         mGridView=(ExpandableHeightGridView)view.findViewById(R.id.grid_imagelist_pro);
         top_sallers=(ExpandableHeightGridView)view.findViewById(R.id.grid_top_sellers);
+        top_sallers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
+                Top_Sallers_Model top_sallers_model= (Top_Sallers_Model) parent.getItemAtPosition(position);
+                String top_sallers_model_id=top_sallers_model.getId();
+                Intent intent=new Intent(getActivity(), Vendor_Profile_With_Products.class);
+                intent.putExtra("user_id",top_sallers_model_id);
+                startActivity(intent);
+            }
+        });
+
         mGridView.setExpanded(true);
         top_sallers.setExpanded(true);
         mGridData = new ArrayList<ProductModel>();
         top_sallers_models=new ArrayList<Top_Sallers_Model>();
 
-           /* mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        grid_new_arrivals=(ViewPager)view.findViewById(R.id.new_arrivals_viewPager);
+
+            mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                    Category_Grid_Model item = (Category_Grid_Model) parent.getItemAtPosition(position);
-                    Intent intent = new Intent(getActivity(), ChatActivity.class);
-                    intent.putExtra("id", item.getId());
+                    ProductModel item = (ProductModel) parent.getItemAtPosition(position);
+                    product_ids=item.getId();
+                    Intent intent = new Intent(getActivity(), Category_Products_List.class);
+                    intent.putExtra("pro_id", product_ids);
+                    intent.putExtra("name",item.getName());
                     startActivity(intent);
                 }
-            });*/
+            });
 
         submit_proof=(ImageView)view.findViewById(R.id.submit_proof);
         sliderImg = new ArrayList<>();
+        sliderUtils2s=new ArrayList<>();
         viewPager = (ViewPager)view.findViewById(R.id.viewPager);
+
         sliderDotspanel = (LinearLayout)view.findViewById(R.id.layoutDots);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -202,6 +207,21 @@ public class Homescreen  extends Fragment {
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                 }
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        grid_new_arrivals.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
             }
             @Override
             public void onPageScrollStateChanged(int state) {
@@ -256,24 +276,30 @@ public class Homescreen  extends Fragment {
                         dots = new ImageView[dotscount];
 
                         for(int i = 0; i < dotscount; i++){
-
-                            dots[i] = new ImageView(getActivity());
-                            dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.non_active_dot));
-                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                            params.setMargins(8, 0, 8, 0);
-                            sliderDotspanel.addView(dots[i], params);
+                            try {
+                                dots[i] = new ImageView(getActivity());
+                                dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.non_active_dot));
+                                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                params.setMargins(8, 0, 8, 0);
+                                sliderDotspanel.addView(dots[i], params);
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
 
                         }
-                        dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.active_dot));
-
-                        productAdapter = new ProductAdapter(getActivity(), R.layout.product_list, mGridData);
-                        mGridView.setAdapter(productAdapter);
-                        productAdapter.setGridData(mGridData);
-                        mGridView.setVisibility(View.VISIBLE);
-                        Picasso.with(getActivity())
-                                .load(bannerbottom)
-                                .fit().centerCrop()
-                                .into(submit_proof);
+                        try {
+                            dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.active_dot));
+                            productAdapter = new ProductAdapter(getActivity(), R.layout.product_list, mGridData);
+                            mGridView.setAdapter(productAdapter);
+                            productAdapter.setGridData(mGridData);
+                            mGridView.setVisibility(View.VISIBLE);
+                            Picasso.get()
+                                    .load(bannerbottom)
+                                    .fit().centerCrop()
+                                    .into(submit_proof);
+                        }catch (NullPointerException e){
+                            e.printStackTrace();
+                        }
 
                     }
                 },
@@ -310,8 +336,10 @@ public class Homescreen  extends Fragment {
                                     try {
                                         JSONObject gettop = toparr.getJSONObject(j);
                                         top_saller_img= gettop.getString("image");
+                                        String user_id =gettop.getString("user_id");
                                         Top_Sallers_Model top_sallers_model=new Top_Sallers_Model();
                                         top_sallers_model.setImage(top_saller_img);
+                                        top_sallers_model.setId(user_id);
                                         top_sallers_models.add(top_sallers_model);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -336,10 +364,63 @@ public class Homescreen  extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        top_sallers_adapter = new Top_Sallers_Adapter(getActivity(), R.layout.to_sellers, top_sallers_models);
-                        top_sallers.setAdapter(top_sallers_adapter);
-                        top_sallers_adapter.setGridData(top_sallers_models);
-                        top_sallers.setVisibility(View.VISIBLE);
+                        try {
+                            top_sallers_adapter = new Top_Sallers_Adapter(getActivity(), R.layout.to_sellers, top_sallers_models);
+                            top_sallers.setAdapter(top_sallers_adapter);
+                            top_sallers_adapter.setGridData(top_sallers_models);
+                            top_sallers.setVisibility(View.VISIBLE);
+                        }catch (NullPointerException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("token",tokens);
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
+        New_Arrivals();
+    }
+
+    private void New_Arrivals(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_dashboardbottom,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if(obj.getBoolean("status")) {
+                                JSONObject dashobj=obj.getJSONObject("dashboard");
+                                JSONArray toparr=dashobj.getJSONArray("newarrivals");
+
+                                for(int j = 0; j < toparr.length(); j++){
+
+                                            sliderUtils2 = new SliderUtils2();
+                                            JSONObject getslide = toparr.getJSONObject(j);
+                                            sliderUtils2.setSliderImageUrl(getslide.getString("image"));
+                                            sliderUtils2.setId(getslide.getString("id"));
+                                            sliderUtils2.setName(getslide.getString("name"));
+                                            sliderUtils2s.add(sliderUtils2);
+                                }
+
+                            }else {
+                                Toast.makeText(getActivity(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        downPageAdapter = new DownPageAdapter(sliderUtils2s, getActivity());
+                        grid_new_arrivals.setAdapter(downPageAdapter);
                     }
                 },
                 new Response.ErrorListener() {
@@ -359,22 +440,21 @@ public class Homescreen  extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity context) {
+    public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-        locationTrack.stopListener();
     }
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void ShowPopup(View v) {
+    public void ShowPopup() {
         LinearLayout btnFollow;
         Button add_state;
         myDialog.setContentView(R.layout.custom_address);
@@ -549,13 +629,21 @@ public class Homescreen  extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        locationTrack.stopListener();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        locationTrack.stopListener();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     public void GetState() {
@@ -704,137 +792,40 @@ public class Homescreen  extends Fragment {
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
     }
 
+    public void CheckShow(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_profile,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            JSONObject userJson = obj.getJSONObject("userdetails");
+                                JSONObject itemslist = userJson.getJSONObject("profile");
+                                String status = itemslist.getString("status");
+                               if(status.equals("0")){
+                                   ShowPopup();
+                               }
 
-    public class LocationTrack extends Service implements LocationListener {
-
-        private final Context mContext;
-        boolean checkGPS = false;
-        boolean checkNetwork = false;
-        boolean canGetLocation = false;
-        Location loc;
-        private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-        private static final long MIN_TIME_BW_UPDATES = 60000;
-
-
-        public LocationTrack(Context mContext) {
-            this.mContext = mContext;
-            getLocation();
-        }
-
-        private Location getLocation() {
-            try {
-                locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
-                checkGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-                checkNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-                if (!checkGPS && !checkNetwork) {
-                    Toast.makeText(mContext, "No Service Provider is available", Toast.LENGTH_SHORT).show();
-                } else {
-                    this.canGetLocation = true;
-                    if (checkGPS) {
-
-                        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
-                        }
-
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, new LocationListener() {
-                            @Override
-                            public void onLocationChanged(Location location) {
-                                latitude = location.getLatitude();
-                                longitude = location.getLongitude();
-                                Log.d( "Coordinates",latitude+""+longitude);
-
-                                try {
-                                    Geocoder geo = new Geocoder(getActivity(), Locale.getDefault());
-                                    List<Address> addresses = geo.getFromLocation(latitude, longitude, 1);
-                                    if (addresses.isEmpty()) {
-                                        locationtext.setText("Location");
-                                    } else {
-                                        if (addresses.size() > 0) {
-                                            locationtext.setText(addresses.get(0).getLocality());
-                                        }
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            @Override
-                            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                            }
-
-                            @Override
-                            public void onProviderEnabled(String provider) {
-
-                            }
-
-                            @Override
-                            public void onProviderDisabled(String provider) {
-
-                            }
-                        });
-                        if (locationManager == null) {
-                            loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                            latitude = loc.getLatitude();
-                            longitude = loc.getLongitude();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("token", tokens);
+                return params;
             }
-
-            return loc;
-        }
-
-        public void stopListener() {
-            if (locationManager != null) {
-
-                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                        && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                locationManager.removeUpdates(LocationTrack.this);
-            }
-        }
-
-        @Override
-        public IBinder onBind(Intent intent) {
-            return null;
-        }
-
-        @Override
-        public void onLocationChanged(Location location) {
-            location.setAccuracy(100);
-            latitude=location.getLatitude();
-            longitude=location.getLongitude();
-            Log.e("latitude", latitude + "");
-            Log.e("longitude", longitude + "");
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-        }
+        };
+        VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
+        UPDATE();
     }
 }

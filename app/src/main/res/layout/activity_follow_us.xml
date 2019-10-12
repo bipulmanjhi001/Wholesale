@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".main.FollowUs">
+    tools:context=".bottomdrawer.FollowUs">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -67,31 +67,10 @@
             android:layout_centerVertical="true" />
 
         <ListView
-            android:id="@+id/product_list"
+            android:id="@+id/follow_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <RelativeLayout
-            android:id="@+id/footer_bar"
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:visibility="gone"
-            android:gravity="center"
-            android:background="@color/colorPrimaryDark"
-            android:layout_height="50sp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:text="SAVE"
-                android:textSize="16sp"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:focusable="true"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
     </RelativeLayout>
 
 </LinearLayout>

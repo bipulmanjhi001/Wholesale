@@ -86,7 +86,7 @@ public class SetProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                startActivity(new Intent(SetProfile.this, Buyer_Verification.class));
+                startActivity(new Intent(SetProfile.this, Proof.class));
             }
         });
         click_bill=(Button)findViewById(R.id.click_bill);
@@ -408,13 +408,14 @@ public class SetProfile extends AppCompatActivity {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK) {
             bitmap = (Bitmap) data.getExtras().get("data");
-            if(checkCam){
+            if (checkCam) {
                 visible_bill.setVisibility(View.VISIBLE);
                 show_img.setImageBitmap(bitmap);
             }
-            if(!checkCam){
+            if (!checkCam) {
                 visible_logo.setVisibility(View.VISIBLE);
                 logo_image.setImageBitmap(bitmap);
                 click_logo.setVisibility(View.GONE);

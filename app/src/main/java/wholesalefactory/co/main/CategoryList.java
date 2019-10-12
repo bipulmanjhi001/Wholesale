@@ -29,7 +29,7 @@ import wholesalefactory.co.api.URLs;
 import wholesalefactory.co.model.ConnectionDetector;
 import wholesalefactory.co.model.ExpandableHeightGridView;
 import wholesalefactory.co.model.VolleySingleton;
-import wholesalefactory.co.pojo.Category_Grid_Model;
+import wholesalefactory.co.model.Category_Grid_Model;
 import org.json.JSONException;
 
 public class CategoryList extends AppCompatActivity {
@@ -43,7 +43,7 @@ public class CategoryList extends AppCompatActivity {
     ProgressBar progressBar;
     private static final String SHARED_PREF_NAME = "wholesalepref";
     private static final String KEY_ID = "token";
-    String tokens;
+    String tokens,catid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +68,8 @@ public class CategoryList extends AppCompatActivity {
             mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                     Category_Grid_Model item = (Category_Grid_Model) parent.getItemAtPosition(position);
-                    Intent intent = new Intent(CategoryList.this, Home.class);
-                    startActivity(intent);
-                    finish();
+                    catid=item.getId();
+                    Update_Category();
                 }
             });
         }else{
@@ -138,6 +137,43 @@ public class CategoryList extends AppCompatActivity {
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
+    public void  Update_Category() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_updatecategory,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if(obj.getBoolean("status")) {
+
+                                Intent intent = new Intent(CategoryList.this, Home.class);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Check connection again.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("token", tokens);
+                params.put("category_id", catid);
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
     @Override
     public void onBackPressed() {
         backButtonHandler();
@@ -161,4 +197,5 @@ public class CategoryList extends AppCompatActivity {
         });
         alertDialog.show();
     }
+
 }

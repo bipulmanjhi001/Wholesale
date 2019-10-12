@@ -65,7 +65,7 @@
         <ProgressBar
             android:layout_below="@+id/summery"
             android:visibility="gone"
-            android:id="@+id/progressBar"
+            android:id="@+id/progressBar_added"
             android:layout_width="30dp"
             android:translationZ="2dp"
             android:layout_height="30dp"

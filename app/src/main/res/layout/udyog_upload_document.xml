@@ -1,6 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_margin="20sp"
+        android:text="Submit Proof of Business"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20sp"
+        android:orientation="vertical"
+        android:layout_marginRight="20sp"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/gst_06_on"
+            android:layout_width="match_parent"
+            android:text="Upload Udhyog Aadhar"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:background="@drawable/udyog_certificate"
+                android:layout_height="150sp" />
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_gravity="top"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="Certificate must show"
+                    android:layout_margin="10sp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text=" * Type Of Enterprise "
+                    android:layout_marginLeft="10sp"
+                    android:textSize="12sp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text=" * Manufacturing "
+                    android:textSize="12sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text=" * Services "
+                    android:textSize="12sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text=" * UAN "
+                    android:textSize="12sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/gst_06"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="10sp"
+                    android:text="Upload"
+                    android:visibility="gone"
+                    android:background="@drawable/select_button"
+                    android:layout_height="40sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

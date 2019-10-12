@@ -1,19 +1,13 @@
 package wholesalefactory.co.main;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -34,18 +27,17 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 import wholesalefactory.co.R;
 import wholesalefactory.co.api.URLs;
+import wholesalefactory.co.bottomdrawer.ChatActivity;
+import wholesalefactory.co.bottomdrawer.FollowUs;
 import wholesalefactory.co.drawer.About;
 import wholesalefactory.co.drawer.Homescreen;
 import wholesalefactory.co.drawer.Orders;
@@ -61,22 +53,21 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     ImageView whishlist_off,whishlist_on,check_notifications,home_prescription_cart;
     Animation shake;
     LinearLayout home;
-    TextView txtName,title,phones;
+    TextView txtName,title,phones,cart_counts;
     DrawerLayout drawer;
     private View navHeader;
     private static final String TAG_HOME = "Home";
     private static final String TAG_ORDER = "Order";
     Toolbar toolbar;
     NavigationView navigationView;
-    public  static final int RequestPermissionCode  = 1 ;
     CircleImageView profilepic;
-    String imageBase;
     Intent intent;
     private static final String SHARED_PREF_NAME = "wholesalepref";
     private static final String KEY_ID = "token";
-    String tokens,phoness,pic,ids;
+    String tokens,phoness,pic,name="Wholesale Factory";
     LinearLayout follow,chats;
-
+    Class fragmentClass;
+    Fragment fragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +76,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
-        EnableRuntimePermission();
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -101,28 +91,22 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         SharedPreferences tokes = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         tokens = tokes.getString(KEY_ID, null);
         phoness = tokes.getString("role",null);
+        Log.d("token",tokens);
 
-        SharedPreferences prefs = getSharedPreferences(
-                "myprofile", MODE_PRIVATE);
-        String name = prefs.getString("userName", "");
+        SharedPreferences prefs = getSharedPreferences("myprofile", MODE_PRIVATE);
+        name = prefs.getString("userName", "");
          phoness = prefs.getString("mobile", "");
 
         if(TextUtils.isEmpty(name)) {
             phones.setText("+91 - " + phoness);
-            txtName.setText("WholeSale Factory");
+            txtName.setText(name);
         }else {
             txtName.setText(name);
             phones.setText("+91 - " + phoness);
         }
         title= (TextView)findViewById(R.id.title);
         profilepic=(CircleImageView)navHeader.findViewById(R.id.imageView);
-        profilepic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 7);
-            }
-        });
+        cart_counts=(TextView)findViewById(R.id.cart_counts);
         navHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -175,14 +159,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         follow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Home.this,FollowUs.class);
+                Intent intent=new Intent(Home.this, FollowUs.class);
                 startActivity(intent);
             }
         });
         chats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Home.this,ChatActivity.class);
+                Intent intent=new Intent(Home.this, ChatActivity.class);
                 startActivity(intent);
             }
         });
@@ -204,149 +188,55 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 finish();
             }
         });
-        SetImage();
-    }
-
-    @Override
-    public void onBackPressed() {
-        backButtonHandler();
-    }
-
-    public void backButtonHandler() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
-        alertDialog.setTitle("Leave application?");
-        alertDialog.setMessage("Are you sure you want to leave the application?");
-        alertDialog.setIcon(R.drawable.ic_launcher_round);
-        alertDialog.setPositiveButton("YES",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Home.this.finish();
-                    }
-                });
-        alertDialog.setNegativeButton("NO",new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        alertDialog.show();
+        CartAmount();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_home) {
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.dashboard, new Homescreen()).commit();
+        if (id == R.id.nav_home) {
+            fragmentClass = Homescreen.class;
             title.setText(TAG_HOME);
 
         } else if (id == R.id.nav_order) {
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.dashboard, new Orders()).commit();
+            fragmentClass= Orders.class;
             title.setText(TAG_ORDER);
 
         } else if (id == R.id.nav_returns) {
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.dashboard, new Returns()).commit();
+            fragmentClass= Returns.class;
             title.setText("Returns");
 
         } else if (id == R.id.nav_about) {
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.dashboard, new About()).commit();
+            fragmentClass= About.class;
             title.setText("About W/F");
 
         } else if (id == R.id.nav_sell) {
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.dashboard, new Sell()).commit();
+            fragmentClass= Sell.class;
             title.setText("Sell on W/F");
 
         }  else if (id == R.id.nav_policies) {
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.dashboard, new Policies()).commit();
+            fragmentClass= Policies.class;
             title.setText("Policies");
 
         }
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.dashboard, fragment).commit();
+        item.setChecked(true);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-
-    public String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 7 && resultCode == RESULT_OK) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imageBase=getStringImage(bitmap);
-            profilepic.setBackgroundResource(android.R.color.transparent);
-            profilepic.setImageBitmap(bitmap);
-            UploadImage();
-        }
-    }
-
-    public void EnableRuntimePermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(Home.this, Manifest.permission.CAMERA)) {
-            Log.d( "Permission","CAMERA permission allows us to Access CAMERA app");
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, RequestPermissionCode);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int RC, String per[], int[] PResult) {
-        switch (RC) {
-            case RequestPermissionCode:
-                if (PResult.length > 0 && PResult[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d( "Permission","Permission Granted, Now your application can access CAMERA.");
-                } else {
-                    Log.d( "Permission","Permission Canceled, Now your application cannot access CAMERA.");
-                }
-                break;
-        }
-    }
-
-    public void UploadImage() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_updatephoto,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject obj = new JSONObject(response);
-
-                            Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("photo", imageBase);
-                params.put("token", tokens);
-                return params;
-            }
-        };
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
     public void SetImage() {
@@ -387,4 +277,60 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
+    public void CartAmount(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_cartcount,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            Integer count=obj.getInt("cartcount");
+                            cart_counts.setText(String.valueOf(count));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("token", tokens);
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+        SetImage();
+    }
+
+    @Override
+    public void onBackPressed() {
+        backButtonHandler();
+        return;
+    }
+
+    public void backButtonHandler() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
+        alertDialog.setTitle("Leave application?");
+        alertDialog.setMessage("Are you sure you want to leave the application?");
+        alertDialog.setIcon(R.drawable.ic_launcher);
+        alertDialog.setPositiveButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Home.this.finish();
+                    }
+                });
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialog.show();
+    }
 }

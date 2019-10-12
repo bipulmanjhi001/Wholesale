@@ -21,5 +21,25 @@ public class URLs {
     public static final String URL_addproduct = ROOT_URL + "addproduct";
     public static final String  URL_productcategory = ROOT_URL + "productcategory";
     public static final String  URL_productsubcategory = ROOT_URL + "productsubcategory";
+    public static final String  URL_userproducts = ROOT_URL + "userproducts";
+    public static final String  URL_dashboardbottom = ROOT_URL + "dashboardbottom";
+    public static final String URL_productdetails = ROOT_URL + "productdetails";
+    public static final String URL_updateproduct = ROOT_URL + "updateproduct";
+    public static final String URL_currentlogin = ROOT_URL + "verifytoken";
+    public static final String URL_updatecategory = ROOT_URL + "setcategory";
+    public static final String URL_listings = ROOT_URL + "listings";
+    public static final String URL_updateproductimage  = ROOT_URL + "updateproductimage";
+    public static final String URL_userlistings = ROOT_URL + "userlistings";
+    public static final String URL_userprofile = ROOT_URL + "userprofile";
+    public static final String URL_addtocart= ROOT_URL + "addtocart";
+    public static final String URL_viewcart = ROOT_URL + "viewcart";
+    public static final String URL_deletecart = ROOT_URL + "deletecart";
+    public static final String URL_cartamount = ROOT_URL + "cartamount";
+    public static final String URL_cartcount = ROOT_URL + "cartcount";
+    public static final String URL_follow= ROOT_URL + "follow";
+    public static final String URL_followlist= ROOT_URL + "followlist";
+    public static final String URL_cartsummary= ROOT_URL + "cartsummary";
+    public static final String URL_locations= ROOT_URL + "locations";
+    public static final String URL_locationlistings= ROOT_URL + "locationlistings";
 
 }

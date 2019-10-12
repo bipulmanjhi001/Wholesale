@@ -63,7 +63,6 @@ public class Login extends AppCompatActivity {
                         .build();
 
                 TrueSDK.init(trueScope);
-                /*Boolean status =*/
                 TrueSDK.getInstance().isUsable();
                // TrueSDK.getInstance().getUserProfile();
                 checkConnection();
@@ -179,7 +178,7 @@ public class Login extends AppCompatActivity {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Login.this);
         alertDialog.setTitle("Leave application?");
         alertDialog.setMessage("Are you sure you want to leave the application?");
-        alertDialog.setIcon(R.mipmap.ic_launcher);
+        alertDialog.setIcon(R.drawable.ic_launcher);
         alertDialog.setPositiveButton("YES",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

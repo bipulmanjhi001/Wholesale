@@ -13,7 +13,7 @@
         android:id="@+id/txtclose"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="#fff"
         android:text="X"
         android:textStyle="bold"
         android:layout_gravity="end"
@@ -48,6 +48,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Montreal,Canada"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/staff_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3000"
             android:textColor="@color/colorPrimaryDark"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"/>

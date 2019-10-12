@@ -1,8 +1,11 @@
 package wholesalefactory.co.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -55,7 +58,6 @@ public class OTP extends AppCompatActivity {
             token = bundle.getString("token");
             mobile = bundle.getString("mobile");
             otp = bundle.getString("otp");
-            Toast.makeText(getApplicationContext(),otp,Toast.LENGTH_LONG).show();
         }
 
         termsandcondition = (CheckBox) findViewById(R.id.termsandcondition);
@@ -72,7 +74,7 @@ public class OTP extends AppCompatActivity {
                 }
             }
         });
-
+        showNotification(OTP.this);
         myDialog=new Dialog(OTP.this);
     }
 
@@ -125,14 +127,21 @@ public class OTP extends AppCompatActivity {
 
                                 JSONObject message = obj.getJSONObject("user");
                                 String token = message.getString("token");
+                                String category=message.getString("category");
                                 User user = new User(token, mobile);
 
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                                 finish();
-
-                                    Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                                if(category.equals("0")) {
+                                         Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                                         startActivity(intent);
+                                         finish();
+                                   }
+                                else  {
+                                    Intent intent = new Intent(getApplicationContext(), Home.class);
                                     startActivity(intent);
                                     finish();
+                                }
 
                             } else if (!obj.getBoolean("status")) {
 
@@ -184,7 +193,7 @@ public class OTP extends AppCompatActivity {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(OTP.this);
         alertDialog.setTitle("Leave application?");
         alertDialog.setMessage("Are you sure you want to leave the application?");
-        alertDialog.setIcon(R.mipmap.ic_launcher);
+        alertDialog.setIcon(R.drawable.ic_launcher);
         alertDialog.setPositiveButton("YES",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -204,7 +213,6 @@ public class OTP extends AppCompatActivity {
         myDialog.setContentView(R.layout.privacy);
         myDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
         t_check=(CheckBox)myDialog.findViewById(R.id.t_check);
         l_check=(CheckBox)myDialog.findViewById(R.id.l_check);
         btnFollow=(LinearLayout)myDialog.findViewById(R.id.CONFIRM_add);
@@ -220,5 +228,24 @@ public class OTP extends AppCompatActivity {
         });
 
         myDialog.show();
+    }
+
+    public void showNotification(Context context) {
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        int notificationId = 1;
+        String channelId = "channel-01";
+        String channelName = "Channel Name";
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel(
+                    channelId, channelName, importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, channelId)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentText("Your OTP is :"+otp)
+                .setContentTitle("Welcome to Wholesale Factory");
+
+        notificationManager.notify(notificationId, mBuilder.build());
     }
 }

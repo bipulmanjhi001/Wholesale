@@ -3,26 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="wholesalefactory.co">
 
-    <uses-sdk tools:overrideLibrary="com.truecaller.android.sdk" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <application
         android:name=".model.wholesaleApplication"
         android:allowBackup="true"
+        android:appComponentFactory="whateverString"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".main.FollowUs"></activity>
+        android:usesCleartextTraffic="true"
+        tools:replace="android:appComponentFactory">
+        <activity android:name=".main.Product_SubList"></activity>
+        <activity
+            android:name=".main.Udhyog_Buyer_Verification"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.Shop_Buyer_Verification"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.Profile_Product_One_For_Main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.Profile_Product_One_Display"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.Vendor_Profile_With_Products_For_Main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.BottomProductView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.Vendor_Profile_With_Products"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.Products_With_Profile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.Category_Products_List"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".bottomdrawer.FollowUs"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".main.EditProduct"
             android:screenOrientation="portrait" />
@@ -49,7 +71,7 @@
             android:label="@string/title_activity_category_list"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".main.ChatActivity"
+            android:name=".bottomdrawer.ChatActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".main.Home"
@@ -66,6 +88,9 @@
             android:name=".main.Login"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".main.Order_Details"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".main.Splashscreen"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -74,14 +99,45 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".main.OneProduct_display"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.truecaller.android.sdk.PartnerKey"
             android:value="NlO50494ecf22b6ac4be285babd173eb526c2" />
 
+        <service
+            android:name=".push.MyFirebaseInstanceIDService"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-sdk tools:overrideLibrary="com.truecaller.android.sdk" />
 
 </manifest>

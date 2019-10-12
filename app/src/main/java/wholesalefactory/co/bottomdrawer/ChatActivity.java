@@ -1,9 +1,7 @@
-package wholesalefactory.co.main;
+package wholesalefactory.co.bottomdrawer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import wholesalefactory.co.R;
+import wholesalefactory.co.main.Home;
 
 public class ChatActivity extends AppCompatActivity {
 

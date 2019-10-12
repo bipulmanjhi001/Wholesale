@@ -52,7 +52,7 @@ public class Top_Sallers_Adapter extends ArrayAdapter<Top_Sallers_Model> {
         holder.url.setText(item.getImage());
         holder.id.setText(item.getId());
 
-        Picasso.with(mContext)
+        Picasso.get()
                 .load(item.getImage())
                 .fit().centerCrop()
                 .into(holder.imageView);
